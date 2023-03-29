@@ -191,20 +191,20 @@
 # file.close()
 
 
-file = open('demo.txt', 'w')
-file.write('I am a demo file.....promise')
-file.close()
+# file = open('demo.txt', 'w')
+# file.write('I am a demo file.....promise')
+# file.close()
 
-input_file = open('morse.txt', 'r')
-output_file = open('translated.txt', 'w')
-for line in input_file:
-    output_file.write(line)
+# input_file = open('morse.txt', 'r')
+# output_file = open('translated.txt', 'w')
+# for line in input_file:
+#     output_file.write(line)
 
-input_file.close()
-output_file.close()
+# input_file.close()
+# output_file.close()
 
-def get_english(phrase):
-    letters = phrase.split('')
-    return "".join([morse_to_letter(letter) for letter in letters])
+# def get_english(phrase):
+#     letters = phrase.split('')
+#     return "".join([morse_to_letter(letter) for letter in letters])
 
 
