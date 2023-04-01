@@ -1,6 +1,11 @@
-from flask import Flask
+from flask import Flask, request, render_template
+from flask_debugtoolbar import DebugToolbarExtension
+from random import randint, choice, sample
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = "hibbidybibiddyboo"
+debug = DebugToolbarExtension(app)   #same file name  /// won't appear unless template is used
+
 
 #flask looks for app.py; if not in shell FLASK_APP=my_app.py flask run
 # 'environment variable'
@@ -15,28 +20,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def home_page():
-    html = """
-    <html>
-        <body>
-            <h1>Home Page</h1>
-            <p>Welcome to my simple app (I'm doin it bitches)</p>
-            <a href='/hello'>Go to Hello Page</a>
-        </body>
-    </html>
-    """
-    return html
+    return render_template('home.html')
 
 @app.route('/hello') #@ = decorator @classmethod -demands method or function directly after
 def say_hello():
-    html = """
-    <html>
-        <body>
-            <h1>HELLO!</h1>
-            <p>This is the Hello Page</p>
-        </body>
-    </html>
-    """
-    return html
+    return render_template('hello.html')
 
 @app.route('/goodbye')
 def say_by():
@@ -135,3 +123,48 @@ def find_post(id):
 # /r/<subreddit>/search
 #Query PARAM /shop?toy=elmo feels more like 'extra info abt a page' often used w/ form
 #  /r/AskReddit/comments/ei1m7x/what_sauce_do_you_prefer_to_dip_your_chicken?sort=new
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~templates/jinja~~~~~~~~~~~~~~~~~~~~
+
+# views are function that return a string(of html) def xxx(): < view
+# template - stand alone file produce html, can be dynamic, can inherit
+# new folder templates must
+
+COMPLIMENTS = ['cool','clever','tenacious','awesome','pythonic']
+
+@app.route('/lucky')
+def lucky_num():
+    """Example of dynamic template"""
+    num = randint(1,10)
+    return render_template('lucky.html', lucky_num=num, msg='You are so lucky!')
+
+@app.route('/form')
+def show_form():
+    return render_template('form.html')
+
+@app.route('/form-2')
+def show_form_2():
+    return render_template('form_2.html')
+
+@app.route('/greet')
+def get_greeting():
+    username = request.args['username']
+    nice_thing = choice(COMPLIMENTS)
+    return render_template('greet.html', username=username, compliment=nice_thing)
+
+@app.route('/greet-2')
+def get_greeting_2():
+    username = request.args['username']
+    wants = request.args.get('wants_compliments')
+    nice_things = sample(COMPLIMENTS, 3)
+    return render_template('greet_2.html', username=username, wants_compliments=wants, compliments=nice_things)
+
+@app.route('/spell/<word>')
+def spell_word(word):
+    caps_word = word.upper()
+    return render_template('spell_word.html', word=caps_word)
+
+#~~~~~~~~~~~~~~~~~template inheritence~~~~~~~~~~~~~~~~~~
+
+#link to style sheet in base template 
