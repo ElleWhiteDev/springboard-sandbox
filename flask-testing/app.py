@@ -49,4 +49,60 @@
 
 #     return x + y + 1
 
+# def reverse_str(s):
+#     """Returns reverse of intput str (s)"""
+#     return s[::-1]
 
+
+# def is_palindrome(s):
+#     """Boolean method to check weather given string is a palindrome"""
+#     rev = reverse_str(s)
+#     return s.lower() == rev.lower()
+
+
+# def factorial(n):
+#     """Calculates factorial iteratively"""
+#     if not (isinstance(n, int) and n >= 0):
+#         raise ValueError("n must be a non-negative integer")
+#     if n == 0:
+#         return 1
+#     result = 1
+#     for i in range(2, n+1):
+#         result *= i
+#     return result
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~integration tests~~~~~~~~~~~~~~~~~~~~
+from flask import Flask, request, render_template, redirect, session
+from flask_debugtoolbar import DebugToolbarExtension
+
+
+app = Flask(__name__)
+app.config["SECRET_KEY"] = "secret"
+app.debug = True
+
+toolbar = DebugToolbarExtension(app)
+
+@app.route("/")
+def index():
+    """Show homepage"""
+
+    # Keep a count of how many times page is visited
+    session["count"] = session.get("count", 0) + 1
+
+    return render_template("index.html")
+
+
+@app.route("/fav-color", methods=["POST"])
+def fav_color():
+    """Show favorite color"""
+
+    fav_color = request.form.get("color")
+
+    return render_template("color.html", fav_color=fav_color)
+
+
+@app.route("/redirect-me")
+def redirect_me():
+    """Redirect user to homepage"""
+
+    return redirect("/")
