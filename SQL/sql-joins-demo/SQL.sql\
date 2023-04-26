@@ -1,0 +1,6 @@
+SELECT *
+FROM roles r
+FULL JOIN movies m
+ON r.movie_id = m.id
+FULL JOIN actors a
+ON r.actor_id = a.id;
