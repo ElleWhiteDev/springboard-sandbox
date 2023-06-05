@@ -7,8 +7,6 @@ def connect_db(app):
     db.app = app
     db.init_app(app)
 
-# MODELS GO BELOW!
-
 
 class Department(db.Model):
     """Department Model"""
