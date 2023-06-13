@@ -47,7 +47,7 @@ def add_employee():
     """Add new employee form"""
     form = EmployeeForm()
     depts = db.session.query(Department.dept_code, Department.dept_name).all()
-    form.dept_code.choices = [(d[0], d[1]) for d in depts]
+    form.dept_code.choices = depts
 
     if form.validate_on_submit():
         name = form.name.data
