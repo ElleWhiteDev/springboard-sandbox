@@ -1,0 +1,62 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    background-color: #F5F5F5;
+}
+
+#game {
+    width: 500px;
+    height: 200px;
+    border: 1px solid black;
+}
+
+#character {
+    width: 20px;
+    height: 50px;
+    border: 1px solid gray;
+    background-image: url('images/dino.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    top: 150px;
+}
+
+.animate-jump {
+    animation: jump 300ms;
+}
+
+@keyframes jump{
+    0%{top: 150px;}
+    30%{top: 100px;}
+    70%{top: 100px;}
+    100%{top: 150px;}
+}
+
+#block {
+    width: 20px;
+    height: 20px;
+    border: 1px solid gray;
+    background-image: url('images/tumble-weed.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    top: 130px;
+    left: 480px;
+}
+
+.animate-block {
+    animation: block 1s linear;
+}
+
+@keyframes block{
+    0%{left:480px;}
+    100%{left:-40px;}
+}
