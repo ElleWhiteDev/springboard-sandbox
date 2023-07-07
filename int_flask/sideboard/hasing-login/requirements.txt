@@ -1,0 +1,17 @@
+bcrypt
+blinker
+cffi
+Click
+Flask
+Flask-Bcrypt
+Flask-DebugToolbar
+Flask-WTF
+itsdangerous
+jedi
+Jinja2
+MarkupSafe
+psycopg2-binary
+pycparser
+six
+Werkzeug
+WTForms
